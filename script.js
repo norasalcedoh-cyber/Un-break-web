@@ -1,5 +1,19 @@
+const themeToggle = document.querySelector(".theme-toggle");
+function updateThemeButton() {
+  const isDark = document.documentElement.dataset.theme === "dark";
+  themeToggle.setAttribute("aria-checked", String(isDark));
+}
+themeToggle.addEventListener("click", () => {
+  const theme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = theme;
+  try { localStorage.setItem("unbreak-theme", theme); } catch { /* Storage is optional. */ }
+  updateThemeButton();
+});
+updateThemeButton();
+
 const panels = [...document.querySelectorAll(".panel")];
 const nextButton = document.querySelector(".axis-symbol");
+const topMeta = document.querySelector(".fixed-meta");
 const logo = document.querySelector(".logo-organic");
 const phases = [...logo.querySelectorAll(".evolution-phase")];
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -18,7 +32,11 @@ const transitions = Array.from({ length: phases.length - 1 }, () => []);
 phases.forEach((phase, phaseIndex) => {
   const mask = svgElement("mask", {
     id: `evolution-mask-${phaseIndex}`, maskUnits: "userSpaceOnUse",
+    maskContentUnits: "userSpaceOnUse",
     x: 0, y: 0, width: 1000, height: 530,
+    // Snap only mask edges to pixels: adjacent strips must not leave hairlines.
+    // The letter outlines keep their normal antialiasing.
+    "shape-rendering": "crispEdges",
     style: "mask-type:luminance",
   });
   mask.append(svgElement("rect", {
@@ -53,6 +71,7 @@ function smoothPhase(value, start, end) {
 
 function updateLogo() {
   animationFrame = 0;
+  topMeta.classList.toggle("fixed-meta--hidden", window.scrollY > 20);
   const maximum = document.documentElement.scrollHeight - window.innerHeight;
   const progress = reducedMotion.matches || maximum <= 0 ? 0
     : Math.min(1, Math.max(0, window.scrollY / maximum));

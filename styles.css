@@ -1,22 +1,82 @@
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+@font-face {
+  font-family: "Instagram Sans";
+  src: url("font/instagram-sans-2/Instagram Sans.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Instagram Sans";
+  src: url("font/instagram-sans-2/Instagram Sans Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Instagram Sans";
+  src: url("font/instagram-sans-2/Instagram Sans Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   font-family: "Plus Jakarta Sans", sans-serif;
-  color: var(--paper);
-  background: var(--ink);
+  color: var(--text);
+  background: var(--grain-gradient);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  --ink: #444444;
+  --black: rgb(37, 41, 46);
+  --black-rgb: 37 41 46;
+  --text: var(--black);
+  --surface: #fff;
+  --glass: rgb(255 255 255 / 28%);
+  --glass-hover: rgb(255 255 255 / 48%);
+  --glass-border: rgb(255 255 255 / 65%);
+  --ink: #49403b;
+  --dark-background: #5b504a;
   --paper: #d9d9d9;
-  --gray: #6b6b6b;
-  --black-45: rgb(0 0 0 / 45%);
+  --gray: #70655f;
+  --black-45: rgb(var(--black-rgb) / 45%);
+  --font-secondary: "Instagram Sans", sans-serif;
+  --grain-gradient: linear-gradient(125deg, #FFD600 15%, #FF7A00 30%, #FF0169, #D300C5 70%, #7638FA 85%);
 }
 
 html {
   scroll-behavior: smooth;
-  background: var(--ink);
+  background: var(--grain-gradient);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --text: #f5f5f5;
+  --surface: var(--black);
+  --paper: var(--black);
+  --ink: #b8b8b8;
+  --gray: #707070;
+  --dark-background: var(--black);
+  --glass: rgb(var(--black-rgb) / 35%);
+  --glass-hover: rgb(var(--black-rgb) / 55%);
+  --glass-border: rgb(255 255 255 / 30%);
+}
+
+:root[data-theme="dark"] .identity {
+  background-image:
+    var(--grain-gradient),
+    linear-gradient(rgb(var(--black-rgb) / 78%), rgb(var(--black-rgb) / 78%)),
+    url("assets/a5432dab-c6b7-4f58-8bf1-fc244511e311.jpg");
+}
+
+@media (pointer: fine) {
+  :root[data-theme="dark"] .identity {
+    --cursor-dot: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='8' fill='%23fff'/%3E%3C/svg%3E");
+  }
 }
 
 body {
@@ -30,14 +90,22 @@ body {
 }
 
 @media (pointer: fine) {
+  body {
+    --cursor-dot: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='.15' stop-color='%23FFD600'/%3E%3Cstop offset='.3' stop-color='%23FF7A00'/%3E%3Cstop offset='.5' stop-color='%23FF0169'/%3E%3Cstop offset='.7' stop-color='%23D300C5'/%3E%3Cstop offset='.85' stop-color='%237638FA'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='12' cy='12' r='8' fill='url(%23g)'/%3E%3C/svg%3E");
+  }
+
+  .identity {
+    --cursor-dot: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='8' fill='rgb(37,41,46)'/%3E%3C/svg%3E");
+  }
+
   body,
   body * {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='8' fill='%23444444'/%3E%3C/svg%3E") 12 12, auto !important;
+    cursor: var(--cursor-dot) 12 12, auto !important;
   }
 }
 
 ::selection {
-  color: var(--ink);
+  color: var(--text);
   background: var(--paper);
 }
 
@@ -49,13 +117,13 @@ a {
 .home {
   position: relative;
   min-height: 100vh;
-  background: var(--ink);
+  background: var(--grain-gradient);
 }
 
 .story {
   width: 50%;
   margin-left: 50%;
-  background-color: var(--ink);
+  background: var(--surface);
 }
 
 .identity {
@@ -66,10 +134,12 @@ a {
   place-items: center;
   overflow: hidden;
   background: var(--paper);
-  color: var(--gray);
+  color: var(--text);
   background-image:
+    var(--grain-gradient),
     linear-gradient(rgb(255 255 255 / 45%), rgb(255 255 255 / 45%)),
     url("assets/a5432dab-c6b7-4f58-8bf1-fc244511e311.jpg");
+  background-blend-mode: color, normal, normal;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -78,9 +148,9 @@ a {
 .identity__meta {
   position: absolute;
   z-index: 2;
-  top: 1.3rem;
-  right: 1.5rem;
-  left: 1.5rem;
+  top: 0.75rem;
+  right: 0.9rem;
+  left: 0.9rem;
   display: flex;
   justify-content: space-between;
   font-size: 0.62rem;
@@ -92,6 +162,7 @@ a {
 .identity__meta--bottom {
   top: auto;
   bottom: 1.3rem;
+  left: 0.9rem;
 }
 
 .identity__actions {
@@ -111,23 +182,57 @@ a {
 .identity__demo {
   width: auto;
   min-width: 0;
-  background: var(--paper);
   text-align: center;
+}
+
+.theme-toggle {
+  position: fixed;
+  z-index: 4;
+  top: 0.55rem;
+  right: 0.9rem;
+  width: 48px;
+  height: 28px;
+  padding: 3px;
+  border: 1px solid;
+  border-radius: 999px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.theme-toggle__thumb {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--grain-gradient);
+  box-shadow: 0 2px 5px rgb(var(--black-rgb) / 18%);
+  transition: transform 0.2s ease;
+}
+
+.theme-toggle[aria-checked="true"] .theme-toggle__thumb {
+  transform: translateX(20px);
 }
 
 .fixed-meta {
   position: fixed;
   z-index: 20;
-  top: 1.3rem;
-  left: calc(50% + 1.5rem);
+  top: 0.75rem;
+  left: calc(50% + 0.9rem);
   display: flex;
-  width: calc(50% - 3rem);
+  width: calc(50% - 5.5rem);
   justify-content: space-between;
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  mix-blend-mode: difference;
+  mix-blend-mode: normal;
   pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.fixed-meta--hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .fixed-meta a {
@@ -149,25 +254,12 @@ a {
   overflow: hidden;
   border-bottom: 1px solid var(--gray);
   scroll-margin-top: 0;
-}
-
-/* Fine film grain on the dark sections, without covering their text. */
-.panel:not(.proposal):not(.closing)::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgb(217 217 217 / 30%), rgb(217 217 217 / 30%)),
-    url("assets/negro.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.48;
+  background: var(--surface);
 }
 
 .panel > * {
   position: relative;
+  z-index: 1;
 }
 
 .page-right > .section-title,
@@ -187,7 +279,7 @@ a {
 
 .index {
   margin-bottom: auto;
-  color: var(--paper);
+  color: var(--text);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -203,6 +295,7 @@ a {
 }
 
 .panel p {
+  font-family: var(--font-secondary);
   margin: 0;
   font-size: clamp(0.78rem, 1vw, 1.02rem);
   line-height: 1.45;
@@ -333,12 +426,12 @@ a {
 
 .proposal {
   justify-content: space-between;
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--surface);
+  color: var(--text);
 }
 
 .proposal .index {
-  color: var(--ink);
+  color: var(--text);
   margin-bottom: 0;
 }
 
@@ -385,7 +478,7 @@ a {
 }
 
 .relations span {
-  color: var(--gray);
+  color: var(--text);
 }
 
 .relations strong,
@@ -405,7 +498,7 @@ a {
   width: 50%;
   margin-top: auto !important;
   padding-top: 4rem;
-  color: var(--paper);
+  color: var(--text);
 }
 
 .interventions {
@@ -432,7 +525,7 @@ a {
   min-height: 13rem;
   padding: 0.8rem;
   overflow: hidden;
-  background: var(--ink);
+  background: var(--surface);
 }
 
 .experiments--text .experiment {
@@ -448,7 +541,7 @@ a {
 
 .experiment-number {
   display: block;
-  color: var(--paper);
+  color: var(--text);
   font-size: 0.55rem;
   font-weight: 700;
 }
@@ -462,7 +555,7 @@ a {
 
 .experiments--text .experiment-tagline {
   margin-bottom: 0.6rem;
-  color: var(--paper);
+  color: var(--text);
   font-weight: 600;
 }
 
@@ -540,7 +633,7 @@ a {
   height: 100%;
   overflow: hidden;
   border-radius: 2.4rem;
-  background: var(--ink);
+  background: var(--surface);
 }
 
 .demo-phone__screen video {
@@ -574,22 +667,12 @@ a {
 
 .closing {
   min-height: 110vh;
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--surface);
+  color: var(--text);
 }
 
 .closing .index {
-  color: var(--ink);
-}
-
-.proposal,
-.closing {
-  background-image:
-    linear-gradient(rgb(255 255 255 / 45%), rgb(255 255 255 / 45%)),
-    url("assets/a5432dab-c6b7-4f58-8bf1-fc244511e311.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  color: var(--text);
 }
 
 .closing-copy {
@@ -624,7 +707,7 @@ a {
   border: 1px solid var(--ink);
   border-radius: 999px;
   background: transparent;
-  color: var(--ink);
+  color: var(--text);
   font: inherit;
   font-size: 0.7rem;
   font-weight: 800;
@@ -642,11 +725,35 @@ a.install-button {
 
 a.install-button:hover,
 a.install-button:focus-visible {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--paper);
+  color: var(--text);
+}
+
+.identity__actions .install-button,
+.theme-toggle {
+  background: var(--glass);
+  border-color: var(--glass-border);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 65%), 0 4px 16px rgb(var(--black-rgb) / 8%);
+}
+
+.identity__actions .install-button:hover,
+.identity__actions .install-button:focus-visible,
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  background: var(--glass-hover);
+  border-color: rgb(255 255 255 / 90%);
+}
+
+.identity__actions .install-button:focus-visible,
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
 }
 
 .demo-instructions {
+  font-family: var(--font-secondary);
   font-size: 0.8rem;
   line-height: 1.6;
 }
@@ -661,7 +768,7 @@ a.install-button:focus-visible {
 }
 
 .install-note {
-  color: var(--ink);
+  color: var(--text);
   font-size: 0.7rem !important;
 }
 
@@ -691,6 +798,8 @@ a.install-button:focus-visible {
 
 .logo-stage {
   position: relative;
+  container-type: inline-size;
+  transform: translateY(-5vh);
   width: 100%;
   aspect-ratio: 1000 / 530;
   max-height: calc(100% - 8rem);
@@ -701,7 +810,21 @@ a.install-button:focus-visible {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  color: var(--gray);
+  color: var(--text);
+}
+
+.logo-caption {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.35rem;
+  color: var(--text);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 8cqw;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
 }
 
 .live-letters {
@@ -722,7 +845,7 @@ a.install-button:focus-visible {
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: var(--paper);
+  background: var(--grain-gradient);
   cursor: pointer;
   transform: translate(-50%, -50%);
   transition: transform 0.3s ease;
@@ -732,13 +855,26 @@ a.install-button:focus-visible {
   transform: translate(-50%, -50%) rotate(90deg);
 }
 
+.axis-symbol::before,
+.theme-toggle__thumb::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23noise)' d='M0 0h128v128H0z'/%3E%3C/svg%3E") repeat;
+  mix-blend-mode: overlay;
+  filter: contrast(220%);
+  opacity: 0.9;
+}
+
 .axis-symbol span {
   position: absolute;
   top: 50%;
   left: 50%;
   width: 1.35rem;
   height: 3px;
-  background: var(--ink);
+  background: var(--black);
   transform: translate(-50%, -50%);
 }
 
@@ -773,6 +909,11 @@ a.install-button:focus-visible {
 }
 
 @media (max-width: 680px) {
+  .theme-toggle {
+    top: 0.55rem;
+    right: 0.9rem;
+  }
+
   .identity {
     inset: 0 0 auto;
     height: 29vh;
@@ -781,7 +922,7 @@ a.install-button:focus-visible {
 
   .identity__meta {
     top: 0.8rem;
-    right: 0.9rem;
+    right: 4.5rem;
     left: 0.9rem;
     font-size: 0.55rem;
   }
@@ -789,6 +930,7 @@ a.install-button:focus-visible {
   .identity__meta--bottom {
     top: auto;
     bottom: 0.8rem;
+    left: 0.9rem;
   }
 
   .identity__actions {
@@ -820,7 +962,7 @@ a.install-button:focus-visible {
     left: 0.9rem;
     z-index: 40;
     width: auto;
-    color: var(--ink);
+    color: var(--text);
     mix-blend-mode: normal;
   }
 
@@ -843,4 +985,6 @@ a.install-button:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .axis-symbol { transition: none; }
+  .theme-toggle__thumb { transition: none; }
+  .fixed-meta { transition: none; }
 }
