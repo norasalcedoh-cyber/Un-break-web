@@ -988,8 +988,14 @@ a.install-button:focus-visible {
   }
 
   .logo-stage {
-    width: min(100%, 22rem);
-    justify-self: center;
+    width: 100%;
+    justify-self: start;
+    align-items: flex-start;
+  }
+
+  .logo-caption {
+    font-size: 5cqw;
+    text-align: left;
   }
 
   .axis-symbol:hover {
