@@ -1,3 +1,14 @@
+const pageLoader = document.querySelector(".page-loader");
+function revealPage() {
+  pageLoader?.classList.add("is-loaded");
+}
+if (document.readyState === "complete") {
+  revealPage();
+} else {
+  window.addEventListener("load", revealPage, { once: true });
+}
+pageLoader?.addEventListener("animationend", () => pageLoader.remove(), { once: true });
+
 const themeToggle = document.querySelector(".theme-toggle");
 function updateThemeButton() {
   const isDark = document.documentElement.dataset.theme === "dark";
