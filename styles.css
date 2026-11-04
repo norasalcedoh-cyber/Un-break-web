@@ -143,7 +143,7 @@ body.is-loading { overflow: hidden; }
   filter: brightness(0) invert(1);
 }
 
-.loader-notification__app { font-weight: 600; }
+.loader-notification__app { font-size: 18px; font-weight: 600; }
 .loader-notification__time { margin-left: auto; color: #696969; }
 
 .loader-notification__message {
